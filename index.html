@@ -196,29 +196,29 @@ button:disabled{
 
 // Valentine Data
 const data={
-1:{day:"Rose Day",emoji:"🌹",msg:"If I had a rose for every time I thought of you, my world would be a garden."},
-2:{day:"Propose Day",emoji:"💍",msg:"Hello Mister, marrying you was the best decision of my life. Will you accept my forever?"},
-3:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!"},
-4:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting."},
-5:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you forever."},
-6:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts."},
-7:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination."},
-8:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever and always!"}
+7:{day:"Rose Day",emoji:"🌹",msg:"If I had a rose for every time I thought of you, my world would be a garden."},
+8:{day:"Propose Day",emoji:"💍",msg:"Hello Mister, marrying you was the best decision of my life. Will you accept my forever?"},
+9:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!"},
+10:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting."},
+11:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you forever."},
+12:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts."},
+13:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination."},
+14:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever and always!"}
 };
 
 const bgImages={
-1:"seven.jpg",2:"eight.jpg",3:"nine.jpg",4:"ten.jpg",
-5:"eleven.jpg",6:"twelve.jpg",7:"thirteen.jpg",8:"forteen1.jpg"
+7:"seven.jpg",8:"eight.jpg",9:"nine.jpg",10:"ten.jpg",
+11:"eleven.jpg",12:"twelve.jpg",13:"thirteen.jpg",14:"forteen1.jpg"
 };
 const bgCardImages={
-1:"rose1.jpg",2:"propose.jpg",3:"chocolate.jpg",4:"teddy.jpg",
-5:"promise.jpg",6:"hug1.jpg",7:"kiss.jpg",8:"valentine1.jpg"
+7:"rose1.jpg",8:"propose.jpg",9:"chocolate.jpg",10:"teddy.jpg",
+11:"promise.jpg",12:"hug1.jpg",13:"kiss.jpg",14:"valentine1.jpg"
 };
 
 let today=new Date();
 let month=today.getMonth()+1;
 let realDate=today.getDate();
-let viewDate=(month===2 && realDate>=1 && realDate<=8)?realDate:1;
+let viewDate=(month===2 && realDate>=7 && realDate<=14)?realDate:7;
 let timer=null;
 let surpriseShown=false;
 
@@ -264,14 +264,14 @@ function show(d){
 }
 
 function previousDay(){
- if(viewDate>1){
+ if(viewDate>7){
    viewDate--;
    show(viewDate);
  }
 }
 
 function nextDay(){
- if(viewDate<8){
+ if(viewDate<14){
    if(viewDate+1>realDate){
      showCountdown();
    }else{
@@ -312,7 +312,7 @@ function showCountdown(){
 function updateCalendar(){
  const cal=document.getElementById("calendar");
  cal.innerHTML="";
- for(let d=1;d<=8;d++){
+ for(let d=7;d<=14;d++){
   const box=document.createElement("div");
   box.className="day-box";
   box.innerText=d+" Feb";
@@ -327,7 +327,7 @@ function updateCalendar(){
 }
 
 function checkSurprise(){
- if(month===2 && viewDate===8 && !surpriseShown){
+ if(month===2 && viewDate===14 && !surpriseShown){
    document.getElementById("surprise").style.display="flex";
    confettiBlast();
    surpriseShown=true;
