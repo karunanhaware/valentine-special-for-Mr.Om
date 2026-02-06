@@ -1,0 +1,141 @@
+<style>
+body{
+ margin:0;
+ font-family:'Segoe UI',sans-serif;
+ background:linear-gradient(135deg,#ff5f6d,#ffc371);
+ min-height:100vh;
+ overflow:hidden;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ 
+ background-size:cover;
+ background-position:center;
+ background-repeat:no-repeat;
+ transition:background-image 0.8s ease;
+}
+
+/* Floating Hearts */
+.heart-float{
+ position:absolute;
+ bottom:-20px;
+ font-size:20px;
+ animation:floatUp 6s linear infinite;
+ opacity:.8;
+}
+@keyframes floatUp{
+ from{transform:translateY(0);opacity:1;}
+ to{transform:translateY(-100vh);opacity:0;}
+}
+
+/* Card */
+.card{
+ background-size:cover;
+ background-position:center;
+ background-repeat:no-repeat;
+
+ width:90%;
+ max-width:420px;
+ padding:25px;
+ border-radius:20px;
+ text-align:center;
+ box-shadow:0 10px 25px rgba(0,0,0,.3);
+ z-index:2;
+ position:relative;
+ color:white;
+}
+
+h1{color:#e63946;}
+h2{color:#333;}
+.emoji{font-size:60px;margin:10px 0;}
+.message{font-size:18px;color:#555;}
+
+.buttons{
+ margin-top:15px;
+ display:flex;
+ justify-content:space-between;
+}
+
+button{
+ padding:10px 22px;
+ border:none;
+ border-radius:25px;
+ background:#e63946;
+ color:#fff;
+ font-size:16px;
+ cursor:pointer;
+}
+button:hover{background:#d62839;}
+
+.timer{
+ margin-top:12px;
+ font-size:17px;
+ font-weight:bold;
+ color:#e63946;
+ display:none;
+}
+
+/* Calendar */
+.calendar{
+ margin-top:18px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px;
+}
+
+.day-box{
+ padding:10px;
+ border-radius:10px;
+ background:#f2f2f2;
+ font-size:14px;
+ cursor:pointer;
+}
+
+.day-box.active{
+ background:#e63946;
+ color:#fff;
+}
+
+.day-box.locked{
+ background:#ddd;
+ color:#999;
+ cursor:not-allowed;
+}
+
+/* Surprise Popup */
+.surprise{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,0.6);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ z-index:999;
+}
+
+.surprise-box{
+ background:#fff;
+ padding:30px;
+ border-radius:20px;
+ text-align:center;
+ animation:pop .6s;
+}
+
+@keyframes pop{
+ from{transform:scale(0);}
+ to{transform:scale(1);}
+}
+
+/* Confetti */
+.confetti{
+ position:fixed;
+ top:-10px;
+ width:10px;
+ height:14px;
+ opacity:.8;
+ animation:fall 3s linear forwards;
+}
+@keyframes fall{
+ to{transform:translateY(100vh) rotate(360deg);}
+}
+</style>
