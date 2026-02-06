@@ -180,32 +180,36 @@ button:hover{background:#d62839;}
 <script>
 
 const data={
-1:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!",color:"#7a1f2b"},
-2:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting.",color:"#7a1f2b"},
-3:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you, support you, and stand by you forever.",color:"#7a1f2b"},
-4:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts — and the longest-lasting comfort.",color:"#7a1f2b"},
-5:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination, and every kiss is a journey I never want to end.",color:"#7a1f2b"},
-6:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever and always!",color:"#7a1f2b"}
+1:{day:"Rose Day",emoji:"🌹",msg:"🌹If I had a rose for every time I thought of you, my world would be a garden.🌹!"},
+2:{day:"Propose Day",emoji:"💍",msg:"Hello Mister, marrying you was the best decision of my life. Today, I propose to love you more deeply, laugh with you more freely, and walk with you for a lifetime. Will you accept my forever?"},
+3:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!",color:"#7a1f2b"},
+4:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting.",color:"#7a1f2b"},
+5:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you, support you, and stand by you forever.",color:"#7a1f2b"},
+6:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts — and the longest-lasting comfort.",color:"#7a1f2b"},
+7:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination, and every kiss is a journey I never want to end.",color:"#7a1f2b"},
+8:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever and always!",color:"#7a1f2b"}
 };
 
 const bgImages={
-
- 1:"nine.jpg",
- 2:"ten.jpg",
- 3:"eleven.jpg",
- 4:"twelve.jpg",
- 5:"thirteen.jpg",
- 6:"forteen1.jpg"
+ 1:"seven.jpg",
+ 2:"eight.jpg",
+ 3:"nine.jpg",
+ 4:"ten.jpg",
+ 5:"eleven.jpg",
+ 6:"twelve.jpg",
+ 7:"thirteen.jpg",
+ 8:"forteen1.jpg"
 };
 
 const bgCardImages = {
- 
- 1:"chocolate.jpg",
- 2:"teddy.jpg",
- 3:"promise.jpg",
- 4:"hug1.jpg",
- 5:"kiss.jpg",
- 6:"valentine1.jpg"
+ 1:"rose1.jpg",
+ 2:"propose.jpg",
+ 3:"chocolate.jpg",
+ 4:"teddy.jpg",
+ 5:"promise.jpg",
+ 6:"hug1.jpg",
+ 7:"kiss.jpg",
+ 8:"valentine1.jpg"
 };
 
 
@@ -218,7 +222,7 @@ function updateBackground(date){
 let today=new Date();
 let month=today.getMonth()+1;
 let realDate=today.getDate();
-let viewDate=(month===2 && realDate>=1 && realDate<=6)?realDate:1;
+let viewDate=(month===2 && realDate>=1 && realDate<=8)?realDate:1;
 
 /* Show Message */
 function show(date){
@@ -281,7 +285,7 @@ function showCountdown(){
 function updateCalendar(){
  const cal=document.getElementById("calendar");
  cal.innerHTML="";
- for(let d=1;d<=6;d++){
+ for(let d=1;d<=8;d++){
    const box=document.createElement("div");
    box.className="day-box";
    box.innerText=d + " Feb";
