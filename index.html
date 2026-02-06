@@ -157,6 +157,13 @@ button:hover{background:#d62839;}
  <div class="emoji" id="emoji"></div>
  <p class="message" id="wish"></p>
 
+ <!-- Propose Day Yes/No -->
+ <div id="proposal" style="margin-top:15px; display:none;">
+   <button id="yesBtn">Yes</button>
+   <button id="noBtn">No</button>
+   <div id="loveEmoji" style="display:none; font-size:50px; margin-top:10px;">😍</div>
+ </div>
+
  <div class="buttons">
    <button onclick="previousDay()">⬅ Previous</button>
    <button onclick="nextDay()">Next ➡</button>
@@ -180,8 +187,8 @@ button:hover{background:#d62839;}
 <script>
 
 const data={
-1:{day:"Rose Day",emoji:"🌹",msg:"🌹If I had a rose for every time I thought of you, my world would be a garden.🌹!"},
-2:{day:"Propose Day",emoji:"💍",msg:"Hello Mister, marrying you was the best decision of my life. Today, I propose to love you more deeply, laugh with you more freely, and walk with you for a lifetime. Will you accept my forever?"},
+1:{day:"Rose Day",emoji:"🌹",msg:"🌹If I had a rose for every time I thought of you, my world would be a garden.🌹!",color:"#7a1f2b"},
+2:{day:"Propose Day",emoji:"💍",msg:"Hello Mister, marrying you was the best decision of my life. Today, I propose to love you more deeply, laugh with you more freely, and walk with you for a lifetime. Will you accept my forever?",color:"#7a1f2b"},
 3:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!",color:"#7a1f2b"},
 4:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting.",color:"#7a1f2b"},
 5:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you, support you, and stand by you forever.",color:"#7a1f2b"},
@@ -190,34 +197,12 @@ const data={
 8:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever and always!",color:"#7a1f2b"}
 };
 
-const bgImages={
- 1:"seven.jpg",
- 2:"eight.jpg",
- 3:"nine.jpg",
- 4:"ten.jpg",
- 5:"eleven.jpg",
- 6:"twelve.jpg",
- 7:"thirteen.jpg",
- 8:"forteen1.jpg"
-};
-
-const bgCardImages = {
- 1:"rose1.jpg",
- 2:"propose.jpg",
- 3:"chocolate.jpg",
- 4:"teddy.jpg",
- 5:"promise.jpg",
- 6:"hug1.jpg",
- 7:"kiss.jpg",
- 8:"valentine1.jpg"
-};
-
+const bgImages={1:"seven.jpg",2:"eight.jpg",3:"nine.jpg",4:"ten.jpg",5:"eleven.jpg",6:"twelve.jpg",7:"thirteen.jpg",8:"forteen1.jpg"};
+const bgCardImages={1:"rose1.jpg",2:"propose.jpg",3:"chocolate.jpg",4:"teddy.jpg",5:"promise.jpg",6:"hug1.jpg",7:"kiss.jpg",8:"valentine1.jpg"};
 
 function updateBackground(date){
- document.body.style.backgroundImage =
-   `url('${bgImages[date]}')`;
+ document.body.style.backgroundImage = `url('${bgImages[date]}')`;
 }
-
 
 let today=new Date();
 let month=today.getMonth()+1;
@@ -228,19 +213,33 @@ let viewDate=(month===2 && realDate>=1 && realDate<=8)?realDate:1;
 function show(date){
  if(month===2 && data[date]){
 	document.querySelector(".card").style.backgroundImage =`url('${bgCardImages[date]}')`;
-   dayName.innerText=data[date].day;
-   emoji.innerText=data[date].emoji;
-   wish.innerText=data[date].msg;
-   wish.style.color = data[date].color;
-   updateBackground(date);
-   
-
+    dayName.innerText=data[date].day;
+    emoji.innerText=data[date].emoji;
+    wish.innerText=data[date].msg;
+    wish.style.color = data[date].color || "#555";
+    updateBackground(date);
  }
+
  countdown.style.display="none";
  updateCalendar();
  checkSurprise();
-}
 
+ // Propose Day interaction
+ const proposalDiv = document.getElementById("proposal");
+ const yesBtn = document.getElementById("yesBtn");
+ const noBtn = document.getElementById("noBtn");
+ const loveEmoji = document.getElementById("loveEmoji");
+
+ // Reset
+ proposalDiv.style.display = "none";
+ loveEmoji.style.display = "none";
+ yesBtn.style.display = "inline-block";
+ noBtn.style.display = "inline-block";
+
+ if(date === 2){ // Only for Propose Day
+   proposalDiv.style.display = "block";
+ }
+}
 
 /* Previous */
 function previousDay(){
@@ -359,6 +358,21 @@ setInterval(()=>{
  document.body.appendChild(h);
  setTimeout(()=>h.remove(),8000);
 },400);
+
+/* Propose Day Buttons */
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const loveEmoji = document.getElementById("loveEmoji");
+
+yesBtn.onclick = () => {
+  loveEmoji.style.display = "block";  // show 😍 emoji
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+};
+
+noBtn.onclick = () => {
+  alert("Error: You must say YES! 💔");  // show error
+};
 </script>
 
 </body>
