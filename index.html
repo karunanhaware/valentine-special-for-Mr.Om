@@ -197,13 +197,13 @@ button:disabled{
 // Valentine Data
 const data={
 7:{day:"Rose Day",emoji:"🌹",msg:"If I had a rose for every time I thought of you, my world would be a garden.",color:"#d00000"},
-8:{day:"Propose Day",emoji:"💍",msg:"Hello Mister, marrying you was the best decision of my life. Will you accept my forever?"},
-9:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!"},
-10:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting."},
-11:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you forever."},
-12:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts."},
-13:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination."},
-14:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever and always!"}
+8:{day:"Propose Day",emoji:"💍",msg:"Hello Mister, marrying you was the best decision of my life. Will you accept me forever?",color:"#d00000"},
+9:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!",color:"#d00000"},
+10:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting.",color:"#d00000"},
+11:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you forever.",color:"#d00000"},
+12:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts.",color:"#d00000"},
+13:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination.",color:"#d00000"},
+14:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever and always!",color:"#d00000"}
 };
 
 const bgImages={
@@ -242,6 +242,7 @@ function show(d){
    dayName.innerText=data[d].day;
    emoji.innerText=data[d].emoji;
    wish.innerText=data[d].msg;
+  wish.style.color = data[d].color;
    updateBackground(d);
  }
 
