@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Week Wishes ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+ margin:0;
+ font-family:'Segoe UI',sans-serif;
+ background:linear-gradient(135deg,#ff5f6d,#ffc371);
+ min-height:100vh;
+ overflow:hidden;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ 
+ background-size:cover;
+ background-position:center;
+ background-repeat:no-repeat;
+ transition:background-image 0.8s ease;
+}
+
+/* Floating Hearts */
+.heart-float{
+ position:absolute;
+ bottom:-20px;
+ font-size:20px;
+ animation:floatUp 6s linear infinite;
+ opacity:.8;
+}
+@keyframes floatUp{
+ from{transform:translateY(0);opacity:1;}
+ to{transform:translateY(-100vh);opacity:0;}
+}
+
+/* Card */
+.card{
+ background-size:cover;
+ background-position:center;
+ background-repeat:no-repeat;
+
+ width:90%;
+ max-width:420px;
+ padding:25px;
+ border-radius:20px;
+ text-align:center;
+ box-shadow:0 10px 25px rgba(0,0,0,.3);
+ z-index:2;
+ position:relative;
+ color:white;
+}
+
+h1{color:#e63946;}
+h2{color:#333;}
+.emoji{font-size:60px;margin:10px 0;}
+.message{font-size:18px;color:#555;}
+
+.buttons{
+ margin-top:15px;
+ display:flex;
+ justify-content:space-between;
+}
+
+button{
+ padding:10px 22px;
+ border:none;
+ border-radius:25px;
+ background:#e63946;
+ color:#fff;
+ font-size:16px;
+ cursor:pointer;
+}
+button:hover{background:#d62839;}
+
+.timer{
+ margin-top:12px;
+ font-size:17px;
+ font-weight:bold;
+ color:#e63946;
+ display:none;
+}
+
+/* Calendar */
+.calendar{
+ margin-top:18px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px;
+}
+
+.day-box{
+ padding:10px;
+ border-radius:10px;
+ background:#f2f2f2;
+ font-size:14px;
+ cursor:pointer;
+}
+
+.day-box.active{
+ background:#e63946;
+ color:#fff;
+}
+
+.day-box.locked{
+ background:#ddd;
+ color:#999;
+ cursor:not-allowed;
+}
+
+/* Surprise Popup */
+.surprise{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,0.6);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ z-index:999;
+}
+
+.surprise-box{
+ background:#fff;
+ padding:30px;
+ border-radius:20px;
+ text-align:center;
+ animation:pop .6s;
+}
+
+@keyframes pop{
+ from{transform:scale(0);}
+ to{transform:scale(1);}
+}
+
+/* Confetti */
+.confetti{
+ position:fixed;
+ top:-10px;
+ width:10px;
+ height:14px;
+ opacity:.8;
+ animation:fall 3s linear forwards;
+}
+@keyframes fall{
+ to{transform:translateY(100vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+<button onclick="shareLove()">💌 Share</button>
+
+<div class="card">
+ <h1>💖 Valentine Week 💖</h1>
+ <h2 id="dayName"></h2>
+ <div class="emoji" id="emoji"></div>
+ <p class="message" id="wish"></p>
+
+ <div class="buttons">
+   <button onclick="previousDay()">⬅ Previous</button>
+   <button onclick="nextDay()">Next ➡</button>
+ </div>
+
+ <div class="timer" id="countdown"></div>
+
+ <!-- Calendar -->
+ <div class="calendar" id="calendar"></div>
+</div>
+
+<!-- Surprise -->
+<div id="surprise" class="surprise" style="display:none;">
+ <div class="surprise-box">
+  <h2>💖 Happy Valentine’s Day 💖</h2>
+  <p>You are my forever and always!</p>
+  <button onclick="closeSurprise()">Close</button>
+ </div>
+</div>
+
+<script>
+
+function shareLove(){
+ if(navigator.share){
+   navigator.share({
+     title:"My Valentine Surprise ❤️",
+     text:"I made something special for you 💖",
+     url:window.location.href
+   });
+ }else{
+   alert("Copy this link and share:\n"+window.location.href);
+ }
+}
+
+
+
+const data={
+3:{day:"Rose Day",emoji:"🌹",msg:"Happy Rose Day!"},
+4:{day:"Propose Day",emoji:"💍",msg:"Will you be mine forever?"},
+5:{day:"Chocolate Day",emoji:"🍫",msg:"Life is sweeter with you!"},
+6:{day:"Teddy Day",emoji:"🧸",msg:"A teddy hug for you!"},
+7:{day:"Promise Day",emoji:"🤝",msg:"I promise to always stay."},
+8:{day:"Hug Day",emoji:"🤗",msg:"Sending warm hugs!"},
+9:{day:"Kiss Day",emoji:"💋",msg:"A kiss for my love!"},
+10:{day:"Valentine's Day",emoji:"❤️",msg:"You are my forever!"}
+};
+
+const bgImages={
+ 3:"seven.jpg",
+ 4:"eight.jpg",
+ 5:"nine.jpg",
+ 6:"ten.jpg",
+ 7:"eleven.jpg",
+ 8:"twelve.jpg",
+ 9:"thirteen.jpg",
+ 10:"forteen.jpg"
+};
+
+const bgCardImages = {
+  3:"rose.jpg",
+ 4:"propose.jpg",
+ 5:"chocolate.jpg",
+ 6:"teddy.jpg",
+ 7:"promise.jpg",
+ 8:"hug.jpg",
+ 9:"kiss.jpg",
+ 10:"valentine.jpg"
+};
+
+
+function updateBackground(date){
+ document.body.style.backgroundImage =
+   `url('${bgImages[date]}')`;
+}
+
+
+let today=new Date();
+let month=today.getMonth()+1;
+let realDate=today.getDate();
+let viewDate=(month===2 && realDate>=3 && realDate<=10)?realDate:3;
+
+/* Show Message */
+function show(date){
+ if(month===2 && data[date]){
+	document.querySelector(".card").style.backgroundImage =`url('${bgCardImages[date]}')`;
+   dayName.innerText=data[date].day;
+   emoji.innerText=data[date].emoji;
+   wish.innerText=data[date].msg;
+   updateBackground(date);
+   
+
+ }
+ countdown.style.display="none";
+ updateCalendar();
+ checkSurprise();
+}
+
+
+/* Previous */
+function previousDay(){
+ if(viewDate>3){
+   viewDate--;
+   show(viewDate);
+ }
+}
+
+/* Next */
+function nextDay(){
+ if(viewDate<realDate){
+   viewDate++;
+   show(viewDate);
+ }else{
+   showCountdown();
+ }
+}
+
+/* Countdown */
+let timer=null;
+function showCountdown(){
+ countdown.style.display="block";
+ if(timer) return;
+
+ timer=setInterval(()=>{
+  const now=new Date();
+  const midnight=new Date();
+  midnight.setHours(24,0,0,0);
+  const diff=midnight-now;
+
+  const h=Math.floor(diff/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+
+  countdown.innerText=`Next day unlocks in ${h}h ${m}m ${s}s`;
+  if(diff<=0) location.reload();
+ },1000);
+}
+
+/* Calendar Build */
+function updateCalendar(){
+ const cal=document.getElementById("calendar");
+ cal.innerHTML="";
+ for(let d=3;d<=10;d++){
+   const box=document.createElement("div");
+   box.className="day-box";
+   box.innerText=d + " Feb";
+
+   if(d===viewDate) box.classList.add("active");
+
+   if(d>realDate){
+     box.classList.add("locked");
+   }else{
+     box.onclick=()=>{viewDate=d;show(d);}
+   }
+   cal.appendChild(box);
+ }
+}
+
+/* Surprise & Confetti */
+function checkSurprise(){
+ if(month===2 && viewDate===14){
+   document.getElementById("surprise").style.display="flex";
+   heartConfetti();
+   confettiBlast();
+ }
+}
+
+function closeSurprise(){
+ document.getElementById("surprise").style.display="none";
+}
+
+function heartConfetti(){
+ for(let i=0;i<30;i++){
+  const h=document.createElement("div");
+  h.innerHTML="💖";
+  h.style.position="fixed";
+  h.style.left=Math.random()*100+"vw";
+  h.style.top="-20px";
+  h.style.fontSize=(20+Math.random()*20)+"px";
+  h.style.animation="floatUp 3s linear";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),3000);
+ }
+}
+
+function confettiBlast(){
+ const colors=["#ff4d6d","#ffd166","#06d6a0","#118ab2"];
+ for(let i=0;i<50;i++){
+  const c=document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  c.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),4000);
+ }
+}
+
+/* Init */
+if(month===2){
+ show(viewDate);
+}else{
+ dayName.innerText="Not Valentine's Week";
+ wish.innerText="Come back in February!";
+}
+
+/* Floating Hearts */
+setInterval(()=>{
+ const h=document.createElement("div");
+ h.className="heart-float";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"vw";
+ h.style.fontSize=(15+Math.random()*20)+"px";
+ h.style.animationDuration=(4+Math.random()*4)+"s";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),8000);
+},400);
+</script>
+
+</body>
+</html>
