@@ -263,6 +263,14 @@ function nextDay(){
 let timer=null;
 function showCountdown(){
  countdown.style.display="block";
+
+	// If it's last day, stop countdown and show final message
+if(viewDate >= 8){
+    countdown.style.display = "block";
+    countdown.innerText = "It's the end of Valentine Week but our love will remain forever 💖";
+    return;
+  }
+	
  if(timer) return;
 
  timer=setInterval(()=>{
