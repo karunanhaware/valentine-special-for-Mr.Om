@@ -180,12 +180,12 @@ button:hover{background:#d62839;}
 <script>
 
 const data={
-1:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!"},
-2:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting."},
-3:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you, support you, and stand by you forever."},
-4:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts — and the longest-lasting comfort."},
-5:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination, and every kiss is a journey I never want to end."},
-6:{day:"Valentine's Day",emoji:"❤️",msg:"A Rose bloomed and I chose you, I Proposed your heart so true, Chocolate sweetened every kiss, Hugs to my Teddy is endless bliss, I Promise love till the very end, with every Hug and every Kiss. You are my forever Valentine!"}
+1:{day:"Chocolate Day",emoji:"🍫",msg:"You are the only flavor of chocolate I like!",color:"black"},
+2:{day:"Teddy Day",emoji:"🧸",msg:"You’re my teddy bear — soft, cuddly, and always comforting.",color:"black"},
+3:{day:"Promise Day",emoji:"🤝",msg:"I promise to love you, support you, and stand by you forever.",color:"black"},
+4:{day:"Hug Day",emoji:"🤗",msg:"A hug is the shortest distance between two hearts — and the longest-lasting comfort.",color:"black"},
+5:{day:"Kiss Day",emoji:"💋",msg:"Your lips are my favorite destination, and every kiss is a journey I never want to end.",color:"black"},
+6:{day:"Valentine's Day",emoji:"❤️",msg:"A Rose bloomed and I chose you, I Proposed your heart so true, Chocolate sweetened every kiss, Hugs to my Teddy is endless bliss, I Promise love till the very end, with every Hug and every Kiss. You are my forever Valentine!",color:"black"}
 };
 
 const bgImages={
@@ -227,6 +227,7 @@ function show(date){
    dayName.innerText=data[date].day;
    emoji.innerText=data[date].emoji;
    wish.innerText=data[date].msg;
+   wish.style.color = data[date].color;
    updateBackground(date);
    
 
