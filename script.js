@@ -1,19 +1,6 @@
 
 <script>
 
-function shareLove(){
- if(navigator.share){
-   navigator.share({
-     title:"My Valentine Surprise ❤️",
-     text:"I made something special for you 💖",
-     url:window.location.href
-   });
- }else{
-   alert("Copy this link and share:\n"+window.location.href);
- }
-}
-
-
 
 const data={
 3:{day:"Rose Day",emoji:"🌹",msg:"Happy Rose Day!"},
