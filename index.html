@@ -153,7 +153,7 @@ button:disabled{
 <body>
 
 <div class="card">
- <h1>💖 Valentine Week 💖</h1>
+ <h1 id="title">💖 Valentine Week 💖</h1>
  <h2 id="dayName"></h2>
  <div class="emoji" id="emoji"></div>
  <p class="message" id="wish"></p>
@@ -376,12 +376,15 @@ noBtn.onclick=()=>{
 
 /* Init */
 if(month===2 && realDate>=7 && realDate<=14){
+ document.getElementById("title").style.display="block";
  show(viewDate);
 }else{
+ document.getElementById("title").style.display="none";
  dayName.innerText="Not Valentine's Week";
  wish.innerText="Kindly visit between 7th to 14th February";
 }
 
+ 
 </script>
 </body>
 </html>
